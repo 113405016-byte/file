@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="張又臻 Alice 的個人介紹與作品集網站">
+<title>張又臻 Alice｜Personal Portfolio</title>
+<style>
+:root{--ink:#393630;--blue:#BBCBD9;--tan:#DCC9B3;--paper:#F8F5EF;--muted:#81796f}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Noto Sans TC","Microsoft JhengHei",sans-serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.wrap{width:min(1080px,90%);margin:auto}
+.serif{font-family:Georgia,"Noto Serif TC","Songti TC",serif}
+.script{font-family:"Brush Script MT","Segoe Script",cursive;font-style:italic}
+header{position:sticky;top:0;z-index:20;background:rgba(248,245,239,.94);backdrop-filter:blur(10px);border-bottom:1px solid #e9e2d8}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:27px}
+.navlinks{display:flex;gap:27px;font-size:12px;letter-spacing:1.3px}
+.navlinks a{padding:9px 0;border-bottom:1px solid transparent;transition:.2s}
+.navlinks a:hover{border-color:var(--ink);color:#8c7662}
+.menu{display:none;background:transparent;border:1px solid #d7cfc3;border-radius:50%;width:39px;height:39px;color:var(--ink)}
+.hero{min-height:440px;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 15px;overflow:hidden}
+.hero:before{content:"";position:absolute;width:430px;height:260px;background:#E9E6DD;border-radius:50%;top:25px;left:50%;transform:translateX(-50%) rotate(-7deg);opacity:.8}
+.hero:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;background:#DCE5EC;right:5%;bottom:20px;opacity:.65}
+.hero-inner{position:relative;z-index:1;width:100%}
+.eyebrow{font-size:11px;letter-spacing:4px;color:#898176}
+.hero-name{display:flex;align-items:baseline;justify-content:center;gap:clamp(12px,3vw,34px);margin:35px 0 22px;flex-wrap:wrap}
+.hero-name .cn,.hero-name .en{font-size:clamp(43px,8vw,83px);font-weight:500}
+.hero-name .cn{font-family:"Noto Serif TC",Georgia,serif;letter-spacing:5px}
+.hero-name .en{font-family:Georgia,serif;letter-spacing:-3px}
+.hero-tag{font-size:clamp(16px,2vw,21px);margin:0 0 12px}
+.hero-desc{font-size:13px;line-height:2;color:#777168;margin:0 auto 26px}
+.primary{display:inline-flex;gap:15px;align-items:center;background:var(--ink);color:white;border:1px solid var(--ink);border-radius:30px;padding:12px 25px;font-size:12px;letter-spacing:1px;transition:.25s}
+.primary:hover{background:transparent;color:var(--ink);transform:translateY(-3px)}
+.section{padding:72px 0;border-top:1px solid #e5ddd2;scroll-margin-top:75px}
+.section-head{display:flex;align-items:baseline;gap:17px;margin-bottom:32px}
+.section-head h2{font-family:Georgia,serif;font-size:clamp(34px,5vw,52px);font-weight:400;margin:0}
+.section-head span{font-size:11px;letter-spacing:2px;color:#998c7e}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}
+.about-text{font-size:14px;line-height:2.3;color:#69635b}
+.about-text strong{color:var(--ink)}
+.fact{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #e5ddd2;font-size:13px}
+.fact-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#e8e2d9;font-size:17px;flex-shrink:0}
+.about-art{min-height:240px;position:relative;display:flex;align-items:center;justify-content:center}
+.about-card{position:absolute;width:43%;min-height:155px;padding:16px;background:#fffdf9;box-shadow:0 8px 24px #51432c12;display:flex;flex-direction:column;justify-content:space-between}
+.about-card:first-child{left:5%;top:12%;transform:rotate(-6deg)}
+.about-card:last-child{right:5%;top:24%;transform:rotate(6deg);background:#e5ebef}
+.about-card .symbol{font-size:54px;text-align:center;padding:14px 0;color:#746b60}
+.about-card small{font-size:10px;letter-spacing:1px}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.skill{padding:24px 12px;text-align:center;border:1px solid #e5ddd2;border-radius:5px;transition:.25s}
+.skill:hover{transform:translateY(-5px);background:#fffdf9;box-shadow:0 8px 22px #51432c12}
+.skill-icon{width:62px;height:62px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;font-size:27px}
+.skill h3{font-size:16px;margin:0 0 9px}
+.skill p{font-size:12px;line-height:1.9;color:#82796f;margin:0}
+.section-intro{font-size:13px;line-height:2;color:#82796f;margin:-15px 0 26px}
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.project{display:block;text-align:left;background:#F1EDE5;border:1px solid #e7dfd3;padding:23px 24px;min-height:170px;position:relative;transition:.25s;color:var(--ink);width:100%;cursor:pointer}
+.project:nth-child(2){background:#E9EEF1}.project:nth-child(3){background:#EAEBDD}.project:nth-child(4){background:#F0E5E4}
+.project:hover{transform:translateY(-4px);box-shadow:0 10px 24px #51432c15}
+.project .num{font-family:Georgia,serif;font-size:13px;color:#948778;letter-spacing:2px}
+.project h3{font-family:Georgia,serif;font-size:23px;font-weight:400;margin:19px 0 8px}
+.project p{font-size:12px;color:#777168;line-height:1.8;margin:0}
+.project .arrow{position:absolute;right:23px;bottom:21px;font-size:20px;transition:.2s}
+.project:hover .arrow{transform:translate(3px,-3px)}
+.contact-box{background:#E8EDF0;padding:38px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.contact-box h3{font-family:Georgia,serif;font-size:30px;font-weight:400;margin:0 0 12px}
+.contact-box p{font-size:13px;color:#716f6a;line-height:1.9}
+.email-link{display:inline-flex;align-items:center;gap:12px;border-bottom:1px solid #817d75;padding:12px 0;font-size:14px;overflow-wrap:anywhere;transition:.2s}
+.email-link:hover{color:#8b715a;border-color:#8b715a}
+.footer{padding:25px 0 30px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#938b80}
+.footer .script{font-size:24px;color:#5f5a53}
+.modal{position:fixed;inset:0;background:#201f1ddd;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.modal-content{width:min(520px,100%);background:var(--paper);padding:32px;position:relative}
+.modal-close{position:absolute;right:13px;top:13px;border:0;background:#e8e2d9;border-radius:50%;width:36px;height:36px;font-size:21px;cursor:pointer}
+.modal-num{font-size:11px;letter-spacing:2px;color:#978a7c}
+.modal-content h3{font-family:Georgia,serif;font-size:30px;font-weight:400;margin:15px 0}
+.modal-content p{font-size:14px;line-height:2;color:#716a60}
+@media(max-width:700px){
+ .nav{height:62px}.navlinks{display:none;position:absolute;top:62px;left:0;right:0;background:var(--paper);padding:20px 5%;z-index:20;flex-direction:column;gap:10px;border-bottom:1px solid #ddd}
+ .navlinks.show{display:flex}.menu{display:block}
+ .hero{min-height:360px;padding:65px 8px}.hero:before{width:95%;height:220px}.hero:after{width:100px;height:100px;right:-25px}
+ .hero-name{gap:10px;margin:28px 0 20px;flex-wrap:nowrap}
+ .hero-name .cn,.hero-name .en{font-size:clamp(30px,8.8vw,56px);letter-spacing:0}
+ .section{padding:52px 0}.about-grid{grid-template-columns:1fr;gap:10px}.about-art{min-height:205px}
+ .skills-grid{grid-template-columns:repeat(2,1fr);gap:10px}.skill{padding:19px 7px}
+ .projects{grid-template-columns:1fr;gap:12px}.project{min-height:145px}
+ .contact-box{grid-template-columns:1fr;padding:25px}.footer{gap:12px;flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<header><nav class="wrap nav" aria-label="網站導覽">
+<a href="#home" class="brand script">Alice.</a>
+<div class="navlinks" id="navlinks">
+<a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#skills">SKILLS</a><a href="#portfolio">PORTFOLIO</a><a href="#contact">CONTACT</a>
+</div>
+<button class="menu" id="menu" aria-label="開啟選單" aria-expanded="false">☰</button>
+</nav></header>
+<main>
+<section class="wrap hero" id="home"><div class="hero-inner">
+<div class="eyebrow">PERSONAL PORTFOLIO · 2026</div>
+<div class="hero-name"><span class="cn">張又臻</span><span class="en">Alice</span></div>
+<p class="hero-tag script">Designing a Better Experience.</p>
+<p class="hero-desc">用觀察發現靈感，用設計傳遞想法。<br>在學習與創作中，探索更多可能。</p>
+<a class="primary" href="#about">探索更多 <span>↓</span></a>
+</div></section>
+<section class="section" id="about"><div class="wrap">
+<div class="section-head"><h2>About Me</h2><span>關於我 / 01</span></div>
+<div class="about-grid"><div>
+<p class="about-text"><strong>你好，我是張又臻 Alice。</strong><br>目前就讀於國立政治大學廣告學系三年級。喜歡觀察生活中的細節，也喜歡透過不同形式的創作，將想法轉化成視覺。<br><br>持續學習視覺傳達設計相關知識，並嘗試將字體、色彩、排版與圖像運用在實際設計中。</p>
+<div class="fact"><span class="fact-icon">⌂</span><span>政治大學・廣告學系三年級</span></div>
+<div class="fact"><span class="fact-icon">☆</span><span>興趣：看球賽、追劇、畫畫</span></div>
+<div class="fact"><span class="fact-icon">✎</span><span>學習：視覺傳達、設計與創意表現</span></div>
+</div><div class="about-art">
+<div class="about-card"><div class="symbol">⚾</div><small>GAME DAY · 看球賽</small></div>
+<div class="about-card"><div class="symbol">✿</div><small>CREATIVE TIME · 畫畫</small></div>
+</div></div></div></section>
+<section class="section" id="skills"><div class="wrap">
+<div class="section-head"><h2>My Skills</h2><span>能力與興趣 / 02</span></div>
+<p class="section-intro">結合觀察、文字與視覺創意，持續累積不同面向的學習經驗。</p>
+<div class="skills-grid">
+<div class="skill"><div class="skill-icon" style="background:#DCE5EC">✎</div><h3>設計 Design</h3><p>視覺編排<br>色彩與字體<br>圖像創作</p></div>
+<div class="skill"><div class="skill-icon" style="background:#E9DFD3;font-family:Georgia,serif">Aa</div><h3>文字 Writing</h3><p>文字撰寫<br>內容整理<br>故事表達</p></div>
+<div class="skill"><div class="skill-icon" style="background:#E8E8D9">◇</div><h3>企劃 Planning</h3><p>創意發想<br>主題規劃<br>內容企劃</p></div>
+<div class="skill"><div class="skill-icon" style="background:#E9DCE0">✧</div><h3>其他 Others</h3><p>觀察與研究<br>持續學習<br>跨領域探索</p></div>
+</div></div></section>
+<section class="section" id="portfolio"><div class="wrap">
+<div class="section-head"><h2>Portfolio</h2><span>作品與練習 / 03</span></div>
+<p class="section-intro">記錄設計探索的過程，從視覺概念、插畫到版面編排，持續嘗試不同的表現方式。<br>點擊文字卡片，了解作品的設計概念。</p>
+<div class="projects">
+<button class="project" data-project="moon"><span class="num">01 / PACKAGING</span><h3>月餅包裝概念</h3><p>以「月」為核心，探索圖形、色彩與包裝視覺的結合。</p><span class="arrow">↗</span></button>
+<button class="project" data-project="poster"><span class="num">02 / VISUAL STUDY</span><h3>海報視覺研究</h3><p>從字體、色彩、圖像與版面配置，分析視覺傳達方式。</p><span class="arrow">↗</span></button>
+<button class="project" data-project="type"><span class="num">03 / TYPOGRAPHY</span><h3>字體與配色探索</h3><p>觀察字體個性及色彩搭配，研究不同的視覺氛圍。</p><span class="arrow">↗</span></button>
+<button class="project" data-project="illustration"><span class="num">04 / ILLUSTRATION</span><h3>插畫與個人創作</h3><p>透過圖像、線條與構圖，將觀察與想法轉化成作品。</p><span class="arrow">↗</span></button>
+</div></div></section>
+<section class="section" id="contact"><div class="wrap">
+<div class="section-head"><h2>Contact</h2><span>保持聯繫 / 04</span></div>
+<div class="contact-box"><div><h3>Let's connect.</h3><p>歡迎交流設計、創意與各種有趣的想法。<br>期待一起探索更多可能！</p></div>
+<div><div style="font-size:11px;letter-spacing:2px;color:#7D7A73">EMAIL / 聯絡信箱</div><a class="email-link" href="mailto:113405016@g.nccu.edu.tw"><span style="font-size:21px">✉</span>113405016@g.nccu.edu.tw ↗</a></div></div>
+<footer class="footer"><span>© 2026 張又臻 Alice. All rights reserved.</span><span class="script">Thank you for visiting ♡</span></footer>
+</div></section>
+</main>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div class="modal-content"><button class="modal-close" id="modal-close" aria-label="關閉">×</button><div class="modal-num" id="modal-num"></div><h3 id="modal-title"></h3><p id="modal-description"></p></div>
+</div>
+<script>
+(() => {
+ const menu=document.getElementById('menu'),nav=document.getElementById('navlinks');
+ menu.addEventListener('click',()=>{const open=nav.classList.toggle('show');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'×':'☰';});
+ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('show');menu.setAttribute('aria-expanded','false');menu.textContent='☰';}));
+ const projects={
+  moon:['01 / PACKAGING DESIGN','月餅包裝概念','以「月」作為視覺核心，探索月亮圖形與月餅包裝的結合。透過低飽和色彩區分不同口味，並加入柔和的手繪符號與字體，營造溫柔療癒的視覺氛圍。'],
+  poster:['02 / VISUAL STUDY','海報視覺研究','從海報作品觀察字體、色彩、圖像與版面之間的關係，研究視覺層級及不同設計元素如何共同傳達主題。'],
+  type:['03 / TYPOGRAPHY','字體與配色探索','探索字體個性、文字層級與色彩搭配，觀察不同字型及配色如何影響作品的情緒、閱讀感受與整體風格。'],
+  illustration:['04 / ILLUSTRATION','插畫與個人創作','透過插畫記錄日常觀察與個人想法，嘗試運用圖像、線條與構圖，將抽象概念轉化成具體的視覺表現。']
+ };
+ const modal=document.getElementById('modal');
+ const close=()=>{modal.classList.remove('open');document.body.style.overflow='';};
+ document.querySelectorAll('[data-project]').forEach(btn=>btn.addEventListener('click',()=>{const d=projects[btn.dataset.project];document.getElementById('modal-num').textContent=d[0];document.getElementById('modal-title').textContent=d[1];document.getElementById('modal-description').textContent=d[2];modal.classList.add('open');document.body.style.overflow='hidden';document.getElementById('modal-close').focus();}));
+ document.getElementById('modal-close').addEventListener('click',close);
+ modal.addEventListener('click',e=>{if(e.target===modal)close();});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close();});
+})();
+</script>
+</body></html>
